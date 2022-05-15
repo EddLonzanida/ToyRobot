@@ -2,7 +2,6 @@
 
 <!-- TOC -->
 
-- [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
 	- [Solution overview](#solution-overview)
 		- [Business Layer](#business-layer)
