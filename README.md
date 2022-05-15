@@ -43,7 +43,7 @@ however further valid movement commands must still be allowed.
 
 ### Business Layer
 
-* Consists of Business Engines, the code representation of specific Business-use-cases. These are highly testable chunk of codes.
+* Consists of Business Engines, the code representation of specific Business-use-cases.
  
 
 #### Business Engines
