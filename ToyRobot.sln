@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{F3D6FD90-368A-4D27-8F30-BDF0BFBB4A9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Service", "Hosts\ToyRobot.Service\ToyRobot.Service.csproj", "{2A2AA2CD-C441-4E70-BC1D-F250242D5E8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{20CB539F-CA54-4EA6-BA73-1F64A91B6D35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Infrastructure", "Infrastructure\ToyRobot.Infrastructure\ToyRobot.Infrastructure.csproj", "{000E89B9-A026-4F01-A6BA-11B24FB3EBF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{1D98C012-8D52-4379-BCF6-57E47E3B5B15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Business", "Business\ToyRobot.Business\ToyRobot.Business.csproj", "{173F4366-808E-4A00-B30E-99210CB61708}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{96B85668-47E6-4517-A8E8-9C5592550242}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToyRobot.Tests.Integration", "Tests\ToyRobot.Tests.Integration\ToyRobot.Tests.Integration.csproj", "{304554BA-499A-4CF0-B32E-02748856FEC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionArtifacts", "SolutionArtifacts", "{6BFCEB28-E0D9-4DB8-ADD5-F22A71C2F342}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Art", "Art", "{D419C357-503D-4B80-9B92-D48BAB289DFD}"
+	ProjectSection(SolutionItems) = preProject
+		SolutionArtifacts\Art\ConsoleAppInAction.png = SolutionArtifacts\Art\ConsoleAppInAction.png
+		SolutionArtifacts\Art\ProjectDependencyDiagram.png = SolutionArtifacts\Art\ProjectDependencyDiagram.png
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A2AA2CD-C441-4E70-BC1D-F250242D5E8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A2AA2CD-C441-4E70-BC1D-F250242D5E8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A2AA2CD-C441-4E70-BC1D-F250242D5E8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A2AA2CD-C441-4E70-BC1D-F250242D5E8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{000E89B9-A026-4F01-A6BA-11B24FB3EBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{000E89B9-A026-4F01-A6BA-11B24FB3EBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{000E89B9-A026-4F01-A6BA-11B24FB3EBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{000E89B9-A026-4F01-A6BA-11B24FB3EBF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{173F4366-808E-4A00-B30E-99210CB61708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{173F4366-808E-4A00-B30E-99210CB61708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{173F4366-808E-4A00-B30E-99210CB61708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{173F4366-808E-4A00-B30E-99210CB61708}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304554BA-499A-4CF0-B32E-02748856FEC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304554BA-499A-4CF0-B32E-02748856FEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304554BA-499A-4CF0-B32E-02748856FEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304554BA-499A-4CF0-B32E-02748856FEC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A2AA2CD-C441-4E70-BC1D-F250242D5E8E} = {F3D6FD90-368A-4D27-8F30-BDF0BFBB4A9D}
+		{000E89B9-A026-4F01-A6BA-11B24FB3EBF1} = {20CB539F-CA54-4EA6-BA73-1F64A91B6D35}
+		{173F4366-808E-4A00-B30E-99210CB61708} = {1D98C012-8D52-4379-BCF6-57E47E3B5B15}
+		{304554BA-499A-4CF0-B32E-02748856FEC8} = {96B85668-47E6-4517-A8E8-9C5592550242}
+		{D419C357-503D-4B80-9B92-D48BAB289DFD} = {6BFCEB28-E0D9-4DB8-ADD5-F22A71C2F342}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE5CEAC8-64EB-43C3-B90C-BA3E897658AD}
+	EndGlobalSection
+EndGlobal
