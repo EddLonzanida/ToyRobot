@@ -1,22 +1,16 @@
-using Microsoft.Extensions.Options;
 using ToyRobot.Business.Contracts;
-using ToyRobot.Infrastructure.Configurations;
 
 namespace ToyRobot.Service;
 
 public class Worker : BackgroundService
 {
 	private readonly ILogger<Worker> logger;
-	private readonly TableDimensionConfig tableDimensionConfig;
 	private readonly IToyRobotWorker toyRobotWorker;
 
-	public Worker(ILogger<Worker> logger
-		, IOptions<TableDimensionConfig> tableDimensionConfig
-		, IToyRobotWorker toyRobotWorker)
+	public Worker(ILogger<Worker> logger, IToyRobotWorker toyRobotWorker)
 	{
 		this.logger = logger;
 		this.toyRobotWorker = toyRobotWorker;
-		this.tableDimensionConfig = tableDimensionConfig.Value;
 	}
 
 	protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -24,7 +18,6 @@ public class Worker : BackgroundService
 		try
 		{
 			logger.LogTrace($"Welcome to TOY ROBOT!{Environment.NewLine}");
-			logger.LogInformation($"Table top dimension-> Height:{tableDimensionConfig.Height} Width:{tableDimensionConfig.Width}");
 			logger.LogDebug("Type your command then press ENTER to accept..");
 
 			while (!cancellationToken.IsCancellationRequested)
@@ -35,7 +28,7 @@ public class Worker : BackgroundService
 				{
 					await Task.Delay(10, cancellationToken);
 
-					toyRobotWorker.Execute(input, tableDimensionConfig);
+					toyRobotWorker.Execute(input);
 
 				}, cancellationToken);
 			}

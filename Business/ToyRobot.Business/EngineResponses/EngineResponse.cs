@@ -1,5 +1,6 @@
 using System.Drawing;
 using ToyRobot.Infrastructure;
+using ToyRobot.Infrastructure.Configurations;
 
 namespace ToyRobot.Business.EngineResponses;
 
@@ -19,11 +20,30 @@ public class EngineResponse
 
 	public Direction Direction { get; }
 
-	public EngineResponse(string? message, string? error, Point currentLocation, Direction direction)
+	public TableDimensionConfig TableDimensionConfig { get; }
+
+	public EngineResponse(string? message
+		, string? error
+		, Point currentLocation
+		, Direction direction
+		, TableDimensionConfig? tableDimensionConfig)
 	{
 		Message = message;
 		Error = error;
-		CurrentLocation = currentLocation;
+		CurrentLocation = new Point(currentLocation.X, currentLocation.Y);
 		Direction = direction;
+
+		if (tableDimensionConfig == null)
+		{
+			TableDimensionConfig = new TableDimensionConfig();
+		}
+		else
+		{
+			TableDimensionConfig = new TableDimensionConfig
+			{
+				Height = tableDimensionConfig.Height,
+				Width = tableDimensionConfig.Width
+			};
+		}
 	}
 }

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Drawing;
 using ToyRobot.Business.Contracts;
 using ToyRobot.Business.EngineResponses;
@@ -14,15 +15,18 @@ public class ToyRobotWorker : IToyRobotWorker
 	private readonly List<IEngine> engines;
 	private EngineResponse engineResponse;
 
-	public ToyRobotWorker(ILogger<ToyRobotWorker> logger, IEnumerable<IEngine>? engines)
+	public ToyRobotWorker(ILogger<ToyRobotWorker> logger, IEnumerable<IEngine>? engines
+		, IOptions<TableDimensionConfig>? tableDimensionConfig)
 	{
 		this.logger = logger;
 		this.engines = engines?.ToList() ?? new List<IEngine>();
 
-		engineResponse = new EngineResponse(null, null, new Point(-1, -1), Direction.NONE);
+		var tmpTableDimensionConfig = tableDimensionConfig?.Value ?? new TableDimensionConfig { Height = 5, Width = 5 };
+
+		engineResponse = new EngineResponse(null, null, new Point(-1, -1), Direction.NONE, tmpTableDimensionConfig);
 	}
 
-	public void Execute(string input, TableDimensionConfig tableDimensionConfig)
+	public void Execute(string input)
 	{
 		input = input.Trim();
 
@@ -37,7 +41,9 @@ public class ToyRobotWorker : IToyRobotWorker
 		}
 		else
 		{
-			engineResponse = engine.Execute(tableDimensionConfig, engineResponse, input);
+			var request = engineResponse.ToRequest(input);
+
+			engineResponse = engine.Execute(request);
 
 			if (!string.IsNullOrWhiteSpace(engineResponse?.Error))
 			{

@@ -16,6 +16,8 @@ public class IntegrationTestFixture
 
 	public static TableDimensionConfig TableDimensionConfig { get; private set; } = new();
 
+	public static IOptions<TableDimensionConfig>? TableDimensionConfigOption { get; private set; }
+
 	public IntegrationTestFixture()
 	{
 		ServiceProvider = Program.CreateHostBuilder(null!).Build()
@@ -25,6 +27,7 @@ public class IntegrationTestFixture
 
 		var tableDimensionConfig = ServiceProvider.GetRequiredService<IOptions<TableDimensionConfig>>();
 
+		TableDimensionConfigOption = tableDimensionConfig;
 		TableDimensionConfig = tableDimensionConfig.Value;
 	}
 

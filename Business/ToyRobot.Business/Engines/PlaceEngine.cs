@@ -1,10 +1,9 @@
-using System.Drawing;
 using ToyRobot.Business.BaseClasses;
 using ToyRobot.Business.Contracts;
+using ToyRobot.Business.EngineRequests;
 using ToyRobot.Business.EngineResponses;
 using ToyRobot.Business.Extensions;
 using ToyRobot.Infrastructure;
-using ToyRobot.Infrastructure.Configurations;
 
 namespace ToyRobot.Business.Engines;
 
@@ -13,13 +12,14 @@ namespace ToyRobot.Business.Engines;
 /// </summary>
 public class PlaceEngine : EngineBase<PlaceEngine>
 {
-	public override EngineResponse Execute(TableDimensionConfig tableDimensionConfig, EngineResponse engineResponse, string input)
+	public override EngineResponse Execute(EngineRequest request)
 	{
+		var input = request.Input ?? string.Empty;
 		var aSegments = input.Split(' ');
 
 		if (aSegments.Length < 2)
 		{
-			return INVALID_COMMAND.GetResponseWithError();
+			return request.GetResponseWithError(INVALID_COMMAND);
 		}
 		var command = input.GetCommand();
 		var arguments = input.Replace(command, string.Empty).Trim();
@@ -29,51 +29,50 @@ public class PlaceEngine : EngineBase<PlaceEngine>
 		{
 			var msg = string.Format(INVALID_ARGUMENT, arguments);
 
-			return msg.GetResponseWithError();
+			return request.GetResponseWithError(msg);
 		}
 
 		aArguments = aArguments.ConvertAll(a => a.Trim());
 
 		var xAsString = aArguments[0];
 		var yAsString = aArguments[1];
-		var compassAsString = aArguments[2];
+		var directionAsString = aArguments[2];
 
 		if (!int.TryParse(xAsString, out var x))
 		{
 			var msg = string.Format(INVALID_ARGUMENT, xAsString);
 
-			return msg.GetResponseWithError();
+			return request.GetResponseWithError(msg);
 		}
 
 		if (!int.TryParse(yAsString, out var y))
 		{
 			var msg = string.Format(INVALID_ARGUMENT, yAsString);
 
-			return msg.GetResponseWithError();
+			return request.GetResponseWithError(msg);
 		}
 
-		var compass = GetCompass(compassAsString);
+		var direction = GetDirection(directionAsString);
 
-		if (compass == Direction.NONE)
+		if (direction == Direction.NONE)
 		{
-			var msg = string.Format(INVALID_DIRECTION, compassAsString);
+			var msg = string.Format(INVALID_DIRECTION, directionAsString);
 
-			return msg.GetResponseWithError();
+			return request.GetResponseWithError(msg);
 		}
 
-		var currentLocation = new Point(x, y);
-		var tmpEngineResponse = new EngineResponse(null, null, currentLocation, compass);
+		var tmpEngineResponse = request.ToResponse(x, y, direction);
 
-		return GetResponse(tableDimensionConfig, x, y, tmpEngineResponse);
+		return GetResponse(x, y, tmpEngineResponse);
 	}
 
-	private static Direction GetCompass(string compassAsString)
+	private static Direction GetDirection(string directionAsString)
 	{
 		try
 		{
-			var compass = (Direction)Enum.Parse(typeof(Direction), compassAsString, true);
+			var direction = (Direction)Enum.Parse(typeof(Direction), directionAsString, true);
 
-			return compass;
+			return direction;
 		}
 		catch (Exception)
 		{

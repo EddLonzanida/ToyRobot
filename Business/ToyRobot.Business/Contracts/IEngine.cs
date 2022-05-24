@@ -1,5 +1,5 @@
+using ToyRobot.Business.EngineRequests;
 using ToyRobot.Business.EngineResponses;
-using ToyRobot.Infrastructure.Configurations;
 using ToyRobot.Infrastructure.Contracts;
 
 namespace ToyRobot.Business.Contracts;
@@ -10,5 +10,5 @@ namespace ToyRobot.Business.Contracts;
 public interface IEngine : IDiDiscoverableTransient
 {
 	string Name { get; }
-	EngineResponse Execute(TableDimensionConfig tableDimensionConfig, EngineResponse engineResponse, string input);
+	EngineResponse Execute(EngineRequest request);
 }

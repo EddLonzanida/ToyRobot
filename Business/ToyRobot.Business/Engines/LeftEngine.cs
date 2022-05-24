@@ -1,9 +1,9 @@
 using ToyRobot.Business.BaseClasses;
 using ToyRobot.Business.Contracts;
+using ToyRobot.Business.EngineRequests;
 using ToyRobot.Business.EngineResponses;
 using ToyRobot.Business.Extensions;
 using ToyRobot.Infrastructure;
-using ToyRobot.Infrastructure.Configurations;
 
 namespace ToyRobot.Business.Engines;
 
@@ -12,19 +12,19 @@ namespace ToyRobot.Business.Engines;
 /// </summary>
 public class LeftEngine : EngineBase<LeftEngine>
 {
-	public override EngineResponse Execute(TableDimensionConfig tableDimensionConfig, EngineResponse engineResponse, string input)
+	public override EngineResponse Execute(EngineRequest request)
 	{
-		if (engineResponse.Direction == Direction.NONE)
+		if (request.Direction == Direction.NONE)
 		{
-			return PLACE_COMMAND_NOT_CALLED.GetResponseWithMessage();
+			return request.GetResponseWithMessage(PLACE_COMMAND_NOT_CALLED);
 		}
 
-		var x = engineResponse.CurrentLocation.X;
-		var y = engineResponse.CurrentLocation.Y;
+		var x = request.CurrentLocation.X;
+		var y = request.CurrentLocation.Y;
 
 		Direction direction;
 
-		switch (engineResponse.Direction)
+		switch (request.Direction)
 		{
 			case Direction.NORTH:
 				direction = Direction.WEST;
@@ -39,11 +39,11 @@ public class LeftEngine : EngineBase<LeftEngine>
 				direction = Direction.NORTH;
 				break;
 			default:
-				return engineResponse;
+				return request.ToResponse();
 		}
 
-		var tmpEngineResponse = direction.GetEngineResponse(x, y);
+		var tmpEngineResponse = request.ToResponse(direction);
 
-		return GetResponse(tableDimensionConfig, x, y, tmpEngineResponse);
+		return GetResponse(x, y, tmpEngineResponse);
 	}
 }

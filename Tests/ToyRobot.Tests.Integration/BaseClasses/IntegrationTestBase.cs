@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using ToyRobot.Business.Contracts;
 using ToyRobot.Business.Extensions;
 using ToyRobot.Infrastructure.Configurations;
@@ -15,12 +16,14 @@ public abstract class IntegrationTestBase
 	protected readonly List<IEngine> Engines;
 	protected readonly IEngine ReportEngine;
 	protected readonly TableDimensionConfig TableDimensionConfig;
+	protected readonly IOptions<TableDimensionConfig>? TableDimensionConfigOption;
 
 	protected IntegrationTestBase()
 	{
 		ServiceProvider = IntegrationTestFixture.ServiceProvider;
 		Engines = IntegrationTestFixture.Engines;
 		TableDimensionConfig = IntegrationTestFixture.TableDimensionConfig;
+		TableDimensionConfigOption = IntegrationTestFixture.TableDimensionConfigOption;
 
 		ReportEngine = Engines.First(x => x.Name.IsEqualTo(nameof(ReportEngine)));
 	}

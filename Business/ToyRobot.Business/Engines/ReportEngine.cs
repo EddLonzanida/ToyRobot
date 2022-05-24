@@ -1,9 +1,9 @@
 using ToyRobot.Business.BaseClasses;
 using ToyRobot.Business.Contracts;
+using ToyRobot.Business.EngineRequests;
 using ToyRobot.Business.EngineResponses;
 using ToyRobot.Business.Extensions;
 using ToyRobot.Infrastructure;
-using ToyRobot.Infrastructure.Configurations;
 
 namespace ToyRobot.Business.Engines;
 
@@ -12,18 +12,18 @@ namespace ToyRobot.Business.Engines;
 /// </summary>
 public class ReportEngine : EngineBase<ReportEngine>
 {
-	public override EngineResponse Execute(TableDimensionConfig tableDimensionConfig, EngineResponse engineResponse, string input)
+	public override EngineResponse Execute(EngineRequest request)
 	{
-		if (engineResponse.Direction == Direction.NONE)
+		if (request.Direction == Direction.NONE)
 		{
-			return PLACE_COMMAND_NOT_CALLED.GetResponseWithMessage();
+			return request.GetResponseWithMessage(PLACE_COMMAND_NOT_CALLED);
 		}
 
-		var x = engineResponse.CurrentLocation.X;
-		var y = engineResponse.CurrentLocation.Y;
-		var compass = engineResponse.Direction;
-		var message = $"Output: {x},{y},{compass}";
+		var x = request.CurrentLocation.X;
+		var y = request.CurrentLocation.Y;
+		var direction = request.Direction;
+		var message = $"Output: {x},{y},{direction}";
 
-		return new EngineResponse(message, null, engineResponse.CurrentLocation, engineResponse.Direction);
+		return new EngineResponse(message, null, request.CurrentLocation, request.Direction, request.TableDimensionConfig);
 	}
 }

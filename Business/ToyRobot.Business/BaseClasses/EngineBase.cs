@@ -1,8 +1,8 @@
 using System.Drawing;
 using ToyRobot.Business.Contracts;
+using ToyRobot.Business.EngineRequests;
 using ToyRobot.Business.EngineResponses;
 using ToyRobot.Business.Extensions;
-using ToyRobot.Infrastructure.Configurations;
 
 namespace ToyRobot.Business.BaseClasses;
 
@@ -17,13 +17,15 @@ public abstract class EngineBase<T> : IEngine
 
 	public string Name => typeof(T).Name;
 
-	public abstract EngineResponse Execute(TableDimensionConfig tableDimensionConfig, EngineResponse engineResponse, string input);
+	public abstract EngineResponse Execute(EngineRequest request);
 
 	/// <summary>
 	/// Check the new location if valid.
 	/// </summary>
-	protected EngineResponse GetResponse(TableDimensionConfig tableDimensionConfig, int newLocationX, int newLocationY, EngineResponse engineResponse)
+	protected EngineResponse GetResponse(int newLocationX, int newLocationY, EngineResponse engineResponse)
 	{
+		var tableDimensionConfig = engineResponse.TableDimensionConfig;
+
 		if (newLocationX < 0 || newLocationX > tableDimensionConfig.Width - 1)
 		{
 			return engineResponse.GetResponseWithMessage(ROBOT_WILL_FALL);
@@ -36,6 +38,6 @@ public abstract class EngineBase<T> : IEngine
 
 		var currentLocation = new Point(newLocationX, newLocationY);
 
-		return new EngineResponse(null, null, currentLocation, engineResponse.Direction);
+		return new EngineResponse(null, null, currentLocation, engineResponse.Direction, tableDimensionConfig);
 	}
 }
