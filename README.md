@@ -19,6 +19,8 @@
 		- [RIGHT](#right)
 		- [REPORT](#report)
 		- [Example Input and Output](#example-input-and-output)
+	- [How to add more commands](#how-to-add-more-commands)
+		- [OBSTACLE command as an example](#obstacle-command-as-an-example)
 	- [How to exit the application](#how-to-exit-the-application)
 - [Automated tests](#automated-tests)
 	- [Integration tests](#integration-tests)
@@ -171,10 +173,45 @@ This console aplication accepts the following commands:
 
 ---
 
+## How to add more commands
+This can be done by:
+1. Adding a new Engine class.
+2. Inheriting from EngineBase.
+   
+### OBSTACLE command as an example
+* We will create a new command called **OBSTACLE** as an example
+* Create an engine class
+* ObstacleEngine registration is automatic. It becomes detectable, along with other commands, just by inheriting from **EngineBase**. No other registration needed.
+  
+	```csharp
+	using ToyRobot.Business.BaseClasses;
+	using ToyRobot.Business.Contracts;
+	using ToyRobot.Business.EngineRequests;
+	using ToyRobot.Business.EngineResponses;
+	using ToyRobot.Business.Extensions;
+	using ToyRobot.Infrastructure;
+
+	namespace ToyRobot.Business.Engines;
+
+	public class ObstacleEngine : EngineBase<ObstacleEngine>
+	{
+		public override EngineResponse Execute(EngineRequest request)
+		{
+			//TODO: Handle EngineRequest here
+
+			throw new NotImplementedException();
+		}
+	}
+	```
+
+	:house: [TOC](#table-of-contents)
+
+---
+
 ## How to exit the application
 
 * You can exit the application by pressing **CTRL+C**.
-
+* You can exit the application by typing **EXIT**.
 
 	:house: [TOC](#table-of-contents)
 

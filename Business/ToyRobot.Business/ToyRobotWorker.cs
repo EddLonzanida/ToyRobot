@@ -33,6 +33,7 @@ public class ToyRobotWorker : IToyRobotWorker
 		var command = input.GetCommand();
 		var engineName = $"{command}Engine";
 
+		//dynamically pick up the engine that can process the command
 		var engine = engines.FirstOrDefault(x => x.Name.IsEqualTo(engineName));
 
 		if (engine == null)
